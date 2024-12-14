@@ -86,7 +86,7 @@
     </div>
 
     <script>
-        // Dataset of recipes (with ingredients and instructions)
+        
         const recipesDataset = [
             {
                 ingredient: "chicken",
@@ -115,7 +115,7 @@
             }
         ];
 
-        // Event listener for the search button
+       
         document.getElementById('searchButton').addEventListener('click', function() {
             const ingredient = document.getElementById('ingredientInput').value.toLowerCase().trim();
             if (ingredient) {
@@ -125,11 +125,11 @@
             }
         });
 
-        // Function to find recipe based on ingredient
+        
         function findRecipe(ingredient) {
             const result = recipesDataset.filter(recipe => recipe.ingredient.toLowerCase() === ingredient);
 
-            // Display recipe or no recipe found message
+            
             if (result.length > 0) {
                 displayRecipe(result[0]);
             } else {
@@ -137,26 +137,26 @@
             }
         }
 
-        // Function to display the recipe
+        
         function displayRecipe(recipe) {
             const recipeContainer = document.getElementById('recipe');
             recipeContainer.innerHTML = ''; // Clear previous results
 
-            // Create recipe card
+            
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('recipe-card');
 
-            // Add recipe name
+            
             const recipeTitle = document.createElement('h3');
             recipeTitle.textContent = recipe.recipeName;
             recipeCard.appendChild(recipeTitle);
 
-            // Add instructions
+            
             const recipeInstructions = document.createElement('p');
             recipeInstructions.textContent = recipe.instructions;
             recipeCard.appendChild(recipeInstructions);
 
-            // Append the recipe card to the container
+            
             recipeContainer.appendChild(recipeCard);
         }
     </script>
