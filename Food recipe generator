@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        #recipe {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .recipe-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        .recipe-card p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Food Recipe Generator</h1>
+        <input type="text" id="ingredientInput" placeholder="Enter an ingredient..." />
+        <button id="searchButton">Get Recipe</button>
+        <div id="recipe"></div>
+    </div>
+
+    <script>
+        // Dataset of recipes (with ingredients and instructions)
+        const recipesDataset = [
+            {
+                ingredient: "chicken",
+                recipeName: "Chicken Curry",
+                instructions: "1. Heat oil in a pan, add onions and garlic. 2. Add chicken and cook until browned. 3. Add spices, tomatoes, and cook for 30 minutes. 4. Serve with rice or bread."
+            },
+            {
+                ingredient: "beef",
+                recipeName: "Beef Stir Fry",
+                instructions: "1. Cut beef into thin strips. 2. Heat oil in a wok, add beef, and stir-fry. 3. Add vegetables and stir-fry for 5 minutes. 4. Add soy sauce, serve with rice."
+            },
+            {
+                ingredient: "potato",
+                recipeName: "Mashed Potatoes",
+                instructions: "1. Peel and boil potatoes until soft. 2. Mash them with butter, milk, and salt. 3. Serve hot."
+            },
+            {
+                ingredient: "tomato",
+                recipeName: "Tomato Soup",
+                instructions: "1. Cook tomatoes, garlic, and onion in a pot. 2. Add water or stock, bring to a boil, and simmer. 3. Blend the soup until smooth. 4. Serve with a dollop of cream."
+            },
+            {
+                ingredient: "egg",
+                recipeName: "Scrambled Eggs",
+                instructions: "1. Crack eggs into a bowl, whisk with a pinch of salt. 2. Heat butter in a pan, pour eggs and cook, stirring occasionally. 3. Serve warm."
+            }
+        ];
+
+        // Event listener for the search button
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const ingredient = document.getElementById('ingredientInput').value.toLowerCase().trim();
+            if (ingredient) {
+                findRecipe(ingredient);
+            } else {
+                alert("Please enter an ingredient.");
+            }
+        });
+
+        // Function to find recipe based on ingredient
+        function findRecipe(ingredient) {
+            const result = recipesDataset.filter(recipe => recipe.ingredient.toLowerCase() === ingredient);
+
+            // Display recipe or no recipe found message
+            if (result.length > 0) {
+                displayRecipe(result[0]);
+            } else {
+                document.getElementById('recipe').innerHTML = `<p>No recipe found for "${ingredient}". Try another ingredient.</p>`;
+            }
+        }
+
+        // Function to display the recipe
+        function displayRecipe(recipe) {
+            const recipeContainer = document.getElementById('recipe');
+            recipeContainer.innerHTML = ''; // Clear previous results
+
+            // Create recipe card
+            const recipeCard = document.createElement('div');
+            recipeCard.classList.add('recipe-card');
+
+            // Add recipe name
+            const recipeTitle = document.createElement('h3');
+            recipeTitle.textContent = recipe.recipeName;
+            recipeCard.appendChild(recipeTitle);
+
+            // Add instructions
+            const recipeInstructions = document.createElement('p');
+            recipeInstructions.textContent = recipe.instructions;
+            recipeCard.appendChild(recipeInstructions);
+
+            // Append the recipe card to the container
+            recipeContainer.appendChild(recipeCard);
+        }
+    </script>
+
+</body>
+</html>
